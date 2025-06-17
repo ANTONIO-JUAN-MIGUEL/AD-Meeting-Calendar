@@ -1,0 +1,16 @@
+{
+    "name": "migzantonio/ad-meeting-calendar",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Migzantonio\\AdMeetingCalendar\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "MadmanMigz",
+            "email": "202310011@fit.edu.ph"
+        }
+    ],
+    "require": {}
+}
