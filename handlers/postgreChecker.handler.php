@@ -1,7 +1,7 @@
 <?php
 
-$host = "host.docker.internal"; 
-$port = "5112";
+$host = "host.docker.internal";
+$port = "5556";
 $username = "user";
 $password = "password";
 $dbname = "mydatabase";
