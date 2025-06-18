@@ -4,7 +4,7 @@ $host = "host.docker.internal";
 $port = "5556";
 $username = "user";
 $password = "password";
-$dbname = "mydatabase";
+$dbname = "mycalendarpostgredb";
 
 $conn_string = "host=$host port=$port dbname=$dbname user=$username password=$password";
 
