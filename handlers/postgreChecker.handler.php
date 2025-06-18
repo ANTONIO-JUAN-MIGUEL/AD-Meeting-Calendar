@@ -1,19 +1,19 @@
 <?php
+require_once __DIR__ . '/../utils/envSetter.util.php';
 
-$host = "host.docker.internal";
-$port = "5556";
-$username = "userpostgre";
-$password = "passwordpostgre";
-$dbname = "mycalendarpostgredb";
+$connStr = sprintf(
+    "host=%s port=%s dbname=%s user=%s password=%s",
+    $typeConfig['pg_host'],
+    $typeConfig['pg_port'],
+    $typeConfig['pg_db'],
+    $typeConfig['pg_user'],
+    $typeConfig['pg_pass']
+);
 
-$conn_string = "host=$host port=$port dbname=$dbname user=$username password=$password";
+$conn = pg_connect($connStr);
 
-$dbconn = pg_connect($conn_string);
-
-if (!$dbconn) {
-    echo "❌ Connection Failed: ", pg_last_error() . "  <br>";
-    exit();
+if ($conn) {
+    echo "✅ PostgreSQL Connection<br>";
 } else {
-    echo "✔️ PostgreSQL Connection  <br>";
-    pg_close($dbconn);
+    echo "❌ Connection Failed: " . pg_last_error() . "<br>";
 }

@@ -1,13 +1,20 @@
 <?php
 
-define('BASE_PATH', dirname(__DIR__));
+if (!defined('BASE_PATH')) {
+    define('BASE_PATH', dirname(__DIR__));
+}
 
 require_once BASE_PATH . '/vendor/autoload.php';
 
 $dotenv = Dotenv\Dotenv::createImmutable(BASE_PATH);
-$dotenv->load();
+try {
+    $dotenv->load();
+} catch (Dotenv\Exception\InvalidPathException $e) {
+    // Try alternative path if first attempt fails
+    $dotenv = Dotenv\Dotenv::createImmutable('/var/www/html');
+    $dotenv->load();
+}
 
-// Example of how to use (replace 'ENV_NAME' with real keys as needed)
 $typeConfig = [
     'pg_host' => $_ENV['PG_HOST'],
     'pg_port' => $_ENV['PG_PORT'],
