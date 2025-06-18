@@ -1,0 +1,19 @@
+<?php
+
+define('BASE_PATH', dirname(__DIR__));
+
+require_once BASE_PATH . '/vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(BASE_PATH);
+$dotenv->load();
+
+// Example of how to use (replace 'ENV_NAME' with real keys as needed)
+$typeConfig = [
+    'pg_host' => $_ENV['PG_HOST'],
+    'pg_port' => $_ENV['PG_PORT'],
+    'pg_db' => $_ENV['PG_DB'],
+    'pg_user' => $_ENV['PG_USER'],
+    'pg_pass' => $_ENV['PG_PASS'],
+    'mongo_uri' => $_ENV['MONGO_URI'],
+    'mongo_db' => $_ENV['MONGO_DB'],
+];
