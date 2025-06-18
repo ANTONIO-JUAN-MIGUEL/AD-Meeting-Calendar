@@ -21,8 +21,8 @@ services:
     image: mongo:latest
     container_name: web-meeting-calendar-mongodb
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: rootPassword
+      MONGO_INITDB_ROOT_USERNAME: usermongodb
+      MONGO_INITDB_ROOT_PASSWORD: passwordmongodb
       MONGO_INITDB_DATABASE: mycalendarmongodb
     ports:
       - "23568:27017"
@@ -34,8 +34,8 @@ services:
     container_name: web-meeting-calendar-postgresql
     restart: always
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
+      POSTGRES_USER: userpostgre
+      POSTGRES_PASSWORD: passwordpostgre
       POSTGRES_DB: mycalendarpostgredb
 
     ports:
