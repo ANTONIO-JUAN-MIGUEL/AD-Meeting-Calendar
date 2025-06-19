@@ -1,6 +1,9 @@
 <?php
 declare(strict_types=1);
 
+// 👇 Fix: define path to utils folder
+define('UTILS_PATH', __DIR__);
+
 // 1) Composer autoload
 require 'vendor/autoload.php';
 
@@ -30,7 +33,7 @@ foreach (['project_users', 'tasks', 'meetings', 'projects', 'users'] as $table) 
 }
 echo "✅ Tables truncated.\n";
 
-// List of model files
+// Load schema files
 $modelFiles = [
     'users.model.sql',
     'projects.model.sql',
