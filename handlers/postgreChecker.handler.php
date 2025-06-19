@@ -1,13 +1,20 @@
 <?php
 require_once __DIR__ . '/../utils/envSetter.util.php';
 
+// Detect Docker
+$isDocker = file_exists('/.dockerenv');
+
+// Inside Docker, override host and port
+$host = $isDocker && $_ENV['PG_HOST'] === 'localhost' ? 'postgresql' : $_ENV['PG_HOST'];
+$port = $isDocker && $_ENV['PG_PORT'] === '5556' ? '5432' : $_ENV['PG_PORT'];
+
 $connStr = sprintf(
     "host=%s port=%s dbname=%s user=%s password=%s",
-    $typeConfig['pg_host'],
-    $typeConfig['pg_port'],
-    $typeConfig['pg_db'],
-    $typeConfig['pg_user'],
-    $typeConfig['pg_pass']
+    $host,
+    $port,
+    $_ENV['PG_DB'],
+    $_ENV['PG_USER'],
+    $_ENV['PG_PASS']
 );
 
 $conn = pg_connect($connStr);
@@ -15,5 +22,6 @@ $conn = pg_connect($connStr);
 if ($conn) {
     echo "✅ PostgreSQL Connection<br>";
 } else {
-    echo "❌ Connection Failed: " . pg_last_error() . "<br>";
+    $error = error_get_last();
+    echo "❌ Connection Failed: " . ($error ? $error['message'] : 'Unknown error') . "<br>";
 }

@@ -1,16 +1,9 @@
 <?php
 declare(strict_types=1);
-
-// 👇 Fix: define path to utils folder
 define('UTILS_PATH', __DIR__);
 
-// 1) Composer autoload
 require 'vendor/autoload.php';
-
-// 2) Composer bootstrap
 require 'bootstrap.php';
-
-// 3) envSetter
 require_once UTILS_PATH . '/envSetter.util.php';
 
 $pgConfig = [
@@ -21,25 +14,17 @@ $pgConfig = [
     'pass' => $_ENV['PG_PASS'],
 ];
 
-// ——— Connect to PostgreSQL ———
 $dsn = "pgsql:host={$pgConfig['host']};port={$pgConfig['port']};dbname={$pgConfig['db']}";
 $pdo = new PDO($dsn, $pgConfig['user'], $pgConfig['pass'], [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
 ]);
 
-echo "Truncating tables…\n";
-foreach (['project_users', 'tasks', 'meetings', 'projects', 'users'] as $table) {
-    $pdo->exec("TRUNCATE TABLE {$table} RESTART IDENTITY CASCADE;");
-}
-echo "✅ Tables truncated.\n";
-
-// Load schema files
+// 1. CREATE all tables
 $modelFiles = [
     'users.model.sql',
-    'projects.model.sql',
     'meetings.model.sql',
     'tasks.model.sql',
-    'project_users.model.sql'
+    'meeting_users.model.sql'
 ];
 
 foreach ($modelFiles as $modelFile) {
@@ -53,5 +38,13 @@ foreach ($modelFiles as $modelFile) {
     $pdo->exec($sql);
     echo "✅ Created from {$modelFile}\n";
 }
+
+// 2. THEN TRUNCATE (now tables exist)
+echo "Truncating tables…\n";
+foreach (['meeting_users', 'tasks', 'meetings', 'users'] as $table) {
+    $pdo->exec("TRUNCATE TABLE {$table} RESTART IDENTITY CASCADE;");
+}
+
+echo "✅ Tables truncated.\n";
 
 echo "✅ Database reset completed!\n";
