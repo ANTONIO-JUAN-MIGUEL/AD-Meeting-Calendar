@@ -4,16 +4,16 @@
 
 <br />
 <div align="center">
-  <a href="https://github.com/zyx-0314/">
+  <a href="https://github.com/ANTONIO-JUAN-MIGUEL/AD-Meeting-Calendar">
   <!-- TODO: If you want to add logo or banner you can add it here -->
     <img src="./assets/img/gitlogonobg.png" alt="gitlogo" width="500" height="500">
   </a>
 <!-- TODO: Change Title to the name of the title of your Project -->
-  <h3 align="center">Title</h3>
+  <h3 align="center">MADMAN'S BOXING GEARS</h3>
 </div>
 <!-- TODO: Make a short description -->
 <div align="center">
-  Short Description. (Optional)
+  Premium boxing gear, engineered for relentless training and fight-night performance. Train like a madman, fight like a champion.
 </div>
 
 <br />
