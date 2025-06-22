@@ -61,16 +61,15 @@
 <!-- TODO: To be changed -->
 <!-- The following are just sample -->
 
-Description of the project in details.
+This project creates an online store, Madman's Boxing Gears, dedicated solely to high-quality boxing equipment. We're building a seamless shopping experience for customers and a robust inventory management system on the backend to keep track of stock and orders.
 
 ### Key Components
 
 <!-- TODO: List of Key Components -->
 <!-- The following are just sample -->
 
-- Authentication & Authorization
-- CRUD Operations for Invetory System
-
+- E-commerce Frontend: The customer-facing website for Browse products, making purchases, and managing user accounts.
+- Backend System: The administrative hub with a powerful inventory management system for real-time stock tracking, order processing, and data analysis.
 ### Technology
 
 <!-- TODO: List of Technology Used -->
