@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../utils/envSetter.util.php';
+require_once UTILS_PATH . 'envSetter.util.php';
 
 try {
     $mongo = new MongoDB\Driver\Manager($typeConfig['mongo_uri']);
@@ -11,3 +11,5 @@ try {
 } catch (MongoDB\Driver\Exception\Exception $e) {
     echo "❌ MongoDB connection failed: " . $e->getMessage() . "<br>";
 }
+
+

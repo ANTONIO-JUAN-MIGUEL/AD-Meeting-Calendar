@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../utils/envSetter.util.php';
+require_once UTILS_PATH . 'envSetter.util.php';
 
 // Detect Docker
 $isDocker = file_exists('/.dockerenv');
