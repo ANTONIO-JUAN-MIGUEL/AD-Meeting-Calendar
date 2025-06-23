@@ -6,7 +6,7 @@
 </head>
 
 <body>
-    <h1>Service Status (After Doing Step 9)</h1>
+    <h1>Service Status</h1>
 
     <h2>MongoDB:</h2>
     <?php include HANDLERS_PATH . 'mongodbChecker.handler.php'; ?>
