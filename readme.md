@@ -5,21 +5,17 @@
 <br />
 <div align="center">
   <a href="https://github.com/ANTONIO-JUAN-MIGUEL/AD-Meeting-Calendar">
-  <!-- TODO: If you want to add logo or banner you can add it here -->
     <img src="./assets/img/meeting.png" alt="gitlogo" width="500" height="400">
   </a>
-<!-- TODO: Change Title to the name of the title of your Project -->
-  <h3 align="center">MADMAN'S BOXING GEARS</h3>
+
+  <h3 align="center">Meeting Calendar</h3>
 </div>
-<!-- TODO: Make a short description -->
+
 <div align="center">
-  Premium boxing gear, engineered for relentless training and fight-night performance. Train like a madman, fight like a champion.
-</div>
+This is a comprehensive Meeting Calendar application developed using PHP, featuring robust database integration.</div>
 
 <br />
 
-<!-- TODO: Change the zyx-0314 into your github username  -->
-<!-- TODO: Change the WD-Template-Project into the same name of your folder -->
 
 ![](https://visit-counter.vercel.app/counter.png?page=ANTONIO-JUAN-MIGUEL/AD-Meeting-Calendar)
 
@@ -30,7 +26,6 @@
 <br />
 <br />
 
-<!-- TODO: If you want to add more layers for your readme -->
 <details>
   <summary>Table of Contents</summary>
   <ol>
@@ -58,21 +53,15 @@
 
 ## Overview
 
-<!-- TODO: To be changed -->
-<!-- The following are just sample -->
-
-This project creates an online store, Madman's Boxing Gears, dedicated solely to high-quality boxing equipment. We're building a seamless shopping experience for customers and a robust inventory management system on the backend to keep track of stock and orders.
+Our Meeting Calendar is a full-featured application built with PHP, leveraging powerful databases like MongoDB and PostgreSQL for data storage.
 
 ### Key Components
 
-<!-- TODO: List of Key Components -->
-<!-- The following are just sample -->
+- Meeting Management: Users can seamlessly create, update, delete, and view meetings, all with detailed information.
+- Docker Containerization: Enjoy effortless deployment and a streamlined development environment setup thanks to Docker.
 
-- E-commerce Frontend: The customer-facing website for Browse products, making purchases, and managing user accounts.
-- Backend System: The administrative hub with a powerful inventory management system for real-time stock tracking, order processing, and data analysis.
 ### Technology
 
-<!-- TODO: List of Technology Used -->
 #### Language
 ![HTML](https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS](https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=css3&logoColor=white)
