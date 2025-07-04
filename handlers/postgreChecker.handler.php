@@ -20,7 +20,7 @@ $connStr = sprintf(
 $conn = pg_connect($connStr);
 
 if ($conn) {
-    echo "✅ PostgreSQL Connection<br>";
+    echo "✅ Connected to PostgreSQL successfully.<br>";
 } else {
     $error = error_get_last();
     echo "❌ Connection Failed: " . ($error ? $error['message'] : 'Unknown error') . "<br>";
