@@ -25,9 +25,13 @@ require_once 'bootstrap.php';
 
         <h2>Automation:</h2>
         <ul>
-            <li>✅ PostgreSQL Reset script is working via <code>composer postgresql:reset</code></li>
-            <li>✅ PostgreSQL Seeder script is working via <code>composer postgresql:seed</code></li>
-            <li>✅ PostgreSQL Migration script is working via <code>composer postgresql:migrate</code></li>
+            <li>✅ PostgreSQL Reset script is working via: <code>docker exec -it web-meeting-calendar-service php utils/dbResetPostgresql.util.php
+</code></li>
+            <li>✅ PostgreSQL Seeder script is working via: <code>docker exec -it web-meeting-calendar-service php utils/dbSeederPostgresql.util.php
+</code></li>
+            <li>✅ PostgreSQL Migration script is working via:
+                <code>docker exec -it web-meeting-calendar-service php utils/dbMigratePostgresql.util.php</code>
+            </li>
         </ul>
     </div>
 </body>
