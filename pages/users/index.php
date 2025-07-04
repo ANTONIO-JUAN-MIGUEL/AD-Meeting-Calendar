@@ -6,6 +6,11 @@ require_once UTILS_PATH . 'auth.util.php';
 Auth::init();
 $user = Auth::user();
 
+if (!$user) {
+    header('Location: /pages/login/index.php');
+    exit;
+}
+
 $pgConfig = [
     'host' => $_ENV['PG_HOST'],
     'port' => $_ENV['PG_PORT'],
@@ -16,6 +21,7 @@ $pgConfig = [
 $pdo = new PDO("pgsql:host={$pgConfig['host']};port={$pgConfig['port']};dbname={$pgConfig['db']}", $pgConfig['user'], $pgConfig['pass']);
 
 $users = UsersDatabase::viewAll($pdo);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
