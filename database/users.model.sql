@@ -1,10 +1,9 @@
-CREATE TABLE IF NOT EXISTS users (
-    id SERIAL PRIMARY KEY,
-    username VARCHAR(50) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    email VARCHAR(100) UNIQUE,
-    full_name VARCHAR(100),
-    role VARCHAR(50),
-    group_name VARCHAR(50),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+CREATE TABLE IF NOT EXISTS public."users" (
+    id uuid NOT NULL PRIMARY KEY DEFAULT gen_random_uuid (),
+    first_name varchar(225) NOT NULL,
+    middle_name varchar(225),
+    last_name varchar(225) NOT NULL,
+    password varchar(225) NOT NULL,
+    username varchar(225) NOT NULL UNIQUE,
+    role varchar(225) NOT NULL
 );
