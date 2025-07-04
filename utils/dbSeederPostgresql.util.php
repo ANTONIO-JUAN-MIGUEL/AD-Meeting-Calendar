@@ -27,19 +27,22 @@ echo "🌱 Seeding users…\n";
 $users = require_once DUMMIES_PATH . '/users.staticData.php';
 
 $stmt = $pdo->prepare("
-    INSERT INTO users (username, role, full_name, password)
-    VALUES (:username, :role, :full_name, :password)
+    INSERT INTO users (username, role, first_name, middle_name, last_name, password)
+    VALUES (:username, :role, :first_name, :middle_name, :last_name, :password)
 ");
 
 foreach ($users as $u) {
     $stmt->execute([
         ':username' => $u['username'],
         ':role' => $u['role'],
-        ':full_name' => $u['first_name'] . ' ' . $u['last_name'],
+        ':first_name' => $u['first_name'],
+        ':middle_name' => $u['middle_name'] ?? null, // allow nullable middle name
+        ':last_name' => $u['last_name'],
         ':password' => password_hash($u['password'], PASSWORD_DEFAULT),
     ]);
 }
 echo "✅ Seeded users.\n";
+
 
 //
 // ===== MEETINGS =====
