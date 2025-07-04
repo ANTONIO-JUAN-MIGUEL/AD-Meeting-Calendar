@@ -19,6 +19,8 @@ services:
     depends_on:
       - mongodb
       - postgresql
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   mongodb:
     image: mongo:latest
@@ -40,7 +42,6 @@ services:
       POSTGRES_USER: userpostgre
       POSTGRES_PASSWORD: passwordpostgre
       POSTGRES_DB: mycalendarpostgredb
-
     ports:
       - "5556:5432"
     volumes:
