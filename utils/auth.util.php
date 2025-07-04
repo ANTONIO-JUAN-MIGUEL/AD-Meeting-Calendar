@@ -40,7 +40,12 @@ class Auth
             throw new Exception("Invalid password.");
         }
 
+        // Remove sensitive data
         unset($user['password']);
+
+        // Add derived field: full_name
+        $user['full_name'] = trim(($user['first_name'] ?? '') . ' ' . ($user['last_name'] ?? ''));
+
         $_SESSION['user'] = $user;
     }
 
