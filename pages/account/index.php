@@ -21,7 +21,9 @@ $user = Auth::user();
         <h1>Account Page</h1>
 
         <?php if ($user): ?>
-            <p>Welcome, <strong><?= htmlspecialchars($user['full_name']) ?></strong>!</p>
+            <p>Welcome,
+                <strong><?= htmlspecialchars($user['full_name'] ?? (($user['first_name'] ?? '') . ' ' . ($user['last_name'] ?? ''))) ?></strong>!
+            </p>
             <p>You are logged in as <strong><?= htmlspecialchars($user['role']) ?></strong>.</p>
         <?php else: ?>
             <p>You are not logged in. Please <a href="/pages/login/index.php">login</a>.</p>
