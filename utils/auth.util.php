@@ -26,28 +26,21 @@ class Auth
      */
     public static function login(PDO $pdo, string $username, string $password): void
     {
-        self::init();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start(); // ✅ Start session if not already
+        }
 
-        $stmt = $pdo->prepare('SELECT * FROM public."users" WHERE username = :username');
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE username = :username");
         $stmt->execute([':username' => $username]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if (!$user) {
-            throw new Exception("Invalid username.");
+        if (!$user || !password_verify($password, $user['password'])) {
+            throw new Exception('Invalid username or password.');
         }
 
-        if (!password_verify($password, $user['password'])) {
-            throw new Exception("Invalid password.");
-        }
-
-        // Remove sensitive data
-        unset($user['password']);
-
-        // Add derived field: full_name
-        $user['full_name'] = trim(($user['first_name'] ?? '') . ' ' . ($user['last_name'] ?? ''));
-
-        $_SESSION['user'] = $user;
+        $_SESSION['user'] = $user; // ✅ Store the user in session
     }
+
 
     /**
      * Return the currently logged-in user, or null.
@@ -56,9 +49,13 @@ class Auth
      */
     public static function user(): ?array
     {
-        self::init();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start(); // ✅ Ensure session is available
+        }
+
         return $_SESSION['user'] ?? null;
     }
+
 
     /**
      * Return true if user is logged in.
