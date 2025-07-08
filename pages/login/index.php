@@ -2,37 +2,30 @@
 require_once '../../bootstrap.php';
 require_once UTILS_PATH . 'auth.util.php';
 Auth::init();
+
 $error = $_GET['error'] ?? null;
+
+ob_start();
 ?>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-    <link rel="stylesheet" href="/assets/css/global.css">
-</head>
+<h1>Login</h1>
 
-<body>
-    <?php include_once BASE_PATH . '/components/partials/navbar.php'; ?>
-    <div class="main-container">
+<?php if ($error): ?>
+    <p class="error"><?= htmlspecialchars($error) ?></p>
+<?php endif; ?>
 
-        <h1>Login</h1>
+<form action="/handlers/auth.handler.php" method="POST">
+    <label>Username:
+        <input type="text" name="username" required>
+    </label>
 
-        <?php if ($error): ?>
-            <p style="color: red;"><?= htmlspecialchars($error) ?></p>
-        <?php endif; ?>
+    <label>Password:
+        <input type="password" name="password" required>
+    </label>
 
-        <form action="/handlers/auth.handler.php" method="POST">
-            <label>Username:
-                <input type="text" name="username" required>
-            </label><br><br>
-            <label>Password:
-                <input type="password" name="password" required>
-            </label><br><br>
-            <button type="submit">Login</button>
-        </form>
-    </div>
-</body>
+    <button type="submit">Login</button>
+</form>
 
-</html>
+<?php
+$content = ob_get_clean();
+include BASE_PATH . '/layouts/main.layout.php';
