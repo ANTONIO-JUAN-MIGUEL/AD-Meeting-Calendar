@@ -34,6 +34,7 @@ try {
     header('Location: /pages/account/index.php');
     exit;
 
+
 } catch (Exception $e) {
     // Catch both PDO and login errors
     $_SESSION['error'] = $e->getMessage();
