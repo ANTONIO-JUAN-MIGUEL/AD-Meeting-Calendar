@@ -1,35 +1,23 @@
 <?php
 require_once '../../bootstrap.php';
 require_once UTILS_PATH . 'auth.util.php';
+
 Auth::init();
 $user = Auth::user();
+
+if (!$user) {
+    header('Location: /pages/login/index.php');
+    exit;
+}
+
+ob_start();
 ?>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <title>My Account</title>
-    <link rel="stylesheet" href="/assets/css/global.css">
-</head>
+<!-- your HTML inside this block -->
+<h1>Account Page</h1>
+<p>Welcome, <strong><?= htmlspecialchars($user['first_name'] . ' ' . $user['last_name']) ?></strong>!</p>
+<p>Your role is <strong><?= htmlspecialchars($user['role']) ?></strong>.</p>
 
-<body>
-
-    <?php include_once BASE_PATH . '/components/partials/navbar.php'; ?>
-    <div class="main-container">
-
-        <h1>Account Page</h1>
-
-        <?php if ($user): ?>
-            <p>Welcome,
-                <strong><?= htmlspecialchars($user['full_name'] ?? (($user['first_name'] ?? '') . ' ' . ($user['last_name'] ?? ''))) ?></strong>!
-            </p>
-            <p>You are logged in as <strong><?= htmlspecialchars($user['role']) ?></strong>.</p>
-        <?php else: ?>
-            <p>You are not logged in. Please <a href="/pages/login/index.php">login</a>.</p>
-        <?php endif; ?>
-
-</body>
-</div>
-
-</html>
+<?php
+$content = ob_get_clean();
+include BASE_PATH . '/layouts/main.layout.php';
