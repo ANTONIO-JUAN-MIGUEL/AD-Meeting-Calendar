@@ -1,7 +1,7 @@
 <?php
 require_once '../../bootstrap.php';
-require_once UTILS_PATH . 'userView.util.php';
 require_once UTILS_PATH . 'auth.util.php';
+require_once UTILS_PATH . 'userView.util.php';
 
 Auth::init();
 $user = Auth::user();
@@ -11,57 +11,42 @@ if (!$user) {
     exit;
 }
 
-$pgConfig = [
-    'host' => $_ENV['PG_HOST'],
-    'port' => $_ENV['PG_PORT'],
-    'db' => $_ENV['PG_DB'],
-    'user' => $_ENV['PG_USER'],
-    'pass' => $_ENV['PG_PASS'],
-];
-$pdo = new PDO("pgsql:host={$pgConfig['host']};port={$pgConfig['port']};dbname={$pgConfig['db']}", $pgConfig['user'], $pgConfig['pass']);
+$pdo = new PDO(
+    "pgsql:host={$_ENV['PG_HOST']};port={$_ENV['PG_PORT']};dbname={$_ENV['PG_DB']}",
+    $_ENV['PG_USER'],
+    $_ENV['PG_PASS']
+);
 
 $users = UsersDatabase::viewAll($pdo);
 
+ob_start();
 ?>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <title>All Users</title>
-    <link rel="stylesheet" href="/assets/css/global.css">
-</head>
+<h1>User List</h1>
 
-<body>
-    <?php include_once BASE_PATH . '/components/partials/navbar.php'; ?>
-    <div class="main-container">
+<?php if (empty($users)): ?>
+    <p style="color: red;">No users found.</p>
+<?php else: ?>
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Full Name</th>
+                <th>Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($users as $u): ?>
+                <tr>
+                    <td><?= htmlspecialchars($u['username']) ?></td>
+                    <td><?= htmlspecialchars($u['first_name'] . ' ' . $u['last_name']) ?></td>
+                    <td><?= htmlspecialchars($u['role']) ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+<?php endif; ?>
 
-        <h1>User List</h1>
-
-        <?php if (!$users): ?>
-            <p style="color: red;">Please login first.</p>
-        <?php else: ?>
-            <table border="1" cellpadding="6">
-                <thead>
-                    <tr>
-                        <th>Username</th>
-                        <th>Full Name</th>
-                        <th>Role</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($users as $u): ?>
-                        <tr>
-                            <td><?= htmlspecialchars($u['username']) ?></td>
-                            <td><?= htmlspecialchars($u['first_name'] . ' ' . $u['last_name']) ?></td>
-                            <td><?= htmlspecialchars($u['role']) ?></td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        <?php endif; ?>
-
-</body>
-</div>
-
-</html>
+<?php
+$content = ob_get_clean();
+include BASE_PATH . '/layouts/main.layout.php';
